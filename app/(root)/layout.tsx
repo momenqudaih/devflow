@@ -3,6 +3,7 @@ import { ReactNode } from "react";
 import { auth } from "@/auth";
 import LeftSideBar from "@/components/navigation/LeftSideBar";
 import Navbar from "@/components/navigation/navbar";
+import RightSideBar from "@/components/navigation/RightSideBar";
 
 const RootLayout = async ({ children }: { children: ReactNode }) => {
   const session = await auth();
@@ -19,6 +20,7 @@ const RootLayout = async ({ children }: { children: ReactNode }) => {
         >
           <div className="mx-auto w-full max-w-5xl">{children}</div>
         </section>
+        <RightSideBar />
       </div>
     </main>
   );
