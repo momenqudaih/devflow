@@ -3,7 +3,7 @@ import { ReactNode } from "react";
 
 import SocialAuthForm from "@/components/forms/SocialAuthForm";
 
-const RootLayout = ({ children }: { children: ReactNode }) => {
+const AuthLayout = ({ children }: { children: ReactNode }) => {
   return (
     <main
       className="flex min-h-screen items-center justify-center 
@@ -37,4 +37,4 @@ const RootLayout = ({ children }: { children: ReactNode }) => {
   );
 };
 
-export default RootLayout;
+export default AuthLayout;
