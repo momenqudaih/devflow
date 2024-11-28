@@ -26,9 +26,11 @@
   },
   "typescript.tsdk": "node_modules/typescript/lib",
   "cSpell.words": [
+    "darkgradient",
     "Devflow",
     "grotesk",
-    "turbopack"
+    "turbopack",
+    "upvotes"
   ],
   "files.exclude": {
     "**/.vscode": true,

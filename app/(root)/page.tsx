@@ -1,8 +1,50 @@
 import Link from "next/link";
 
+import LocalSearch from "@/components/search/LocalSearch";
 import { Button } from "@/components/ui/button";
 
-const Home = async () => {
+const questions = [
+  {
+    _id: "1",
+    title: "How to learn React?",
+    description: "I want to learn React, can anyone help me?",
+    tags: [
+      { _id: "1", name: "React" },
+      { _id: "2", name: "JavaScript" },
+    ],
+    author: { _id: "1", name: "John Doe" },
+    upvotes: 10,
+    answers: 5,
+    views: 100,
+    createdAt: new Date(),
+  },
+  {
+    _id: "2",
+    title: "How to learn JavaScript?",
+    description: "I want to learn JavaScript, can anyone help me?",
+    tags: [
+      { _id: "1", name: "React" },
+      { _id: "2", name: "JavaScript" },
+    ],
+    author: { _id: "1", name: "John Doe" },
+    upvotes: 10,
+    answers: 5,
+    views: 100,
+    createdAt: new Date(),
+  },
+];
+
+interface searchParamsProps {
+  searchParams: Promise<{ [key: string]: string }>;
+}
+
+const Home = async ({ searchParams }: searchParamsProps) => {
+  const { query = "" } = await searchParams;
+
+  const filteredQuestions = questions.filter((question) =>
+    question.title.toLowerCase().includes(query.toLowerCase())
+  );
+
   return (
     <>
       <section className="flex flex-col-reverse justify-between gap-4 sm:flex-row sm:items-center">
@@ -14,13 +56,19 @@ const Home = async () => {
           <Link href="/login">Ask a Question</Link>
         </Button>
       </section>
-      <section className="mt-11">Local Search bar</section>
+      <section className="mt-11">
+        <LocalSearch
+          route="/"
+          imgSrc="/icons/search.svg"
+          placeHolder="Search questions..."
+          otherClasses="flex-1"
+        />
+      </section>
       Filters Section
       <div className="mt-10 flex w-full flex-col gap-6">
-        <p>Q Card</p>
-        <p>Q Card</p>
-        <p>Q Card</p>
-        <p>Q Card</p>
+        {filteredQuestions.map((question) => (
+          <h1 key={question._id}> {question.title} </h1>
+        ))}
       </div>
     </>
   );
