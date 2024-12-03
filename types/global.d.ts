@@ -1,7 +1,7 @@
 interface Tag {
   _id: string;
   name: string;
-  questions: number;
+  questions?: number;
 }
 
 interface Author {
