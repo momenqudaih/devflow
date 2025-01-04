@@ -7,7 +7,7 @@ import React, { useRef } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 
-import { AskQuestionFormSchema } from "@/lib/validations";
+import { AskQuestionSchema } from "@/lib/validations";
 
 import TagCard from "../cards/TagCard";
 import { Button } from "../ui/button";
@@ -31,8 +31,8 @@ const Editor = dynamic(() => import("@/components/editor"), {
 const QuestionForm = () => {
   const editorRef = useRef<MDXEditorMethods>(null);
 
-  const form = useForm<z.infer<typeof AskQuestionFormSchema>>({
-    resolver: zodResolver(AskQuestionFormSchema),
+  const form = useForm<z.infer<typeof AskQuestionSchema>>({
+    resolver: zodResolver(AskQuestionSchema),
     defaultValues: {
       title: "",
       content: "",
@@ -40,9 +40,7 @@ const QuestionForm = () => {
     },
   });
 
-  const handleCreateQuestion = (
-    data: z.infer<typeof AskQuestionFormSchema>
-  ) => {
+  const handleCreateQuestion = (data: z.infer<typeof AskQuestionSchema>) => {
     console.log(data);
   };
 

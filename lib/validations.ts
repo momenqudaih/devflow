@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const SignInFormSchema = z.object({
+export const SignInSchema = z.object({
   email: z
     .string()
     .min(1, { message: "Email is required" })
@@ -8,11 +8,11 @@ export const SignInFormSchema = z.object({
 
   password: z
     .string()
-    .min(6, { message: "Password must be at least 6 characters." })
-    .max(100, { message: "Password must be at most 100 characters." }),
+    .min(6, { message: "Password must be at least 6 characters long. " })
+    .max(100, { message: "Password cannot exceed 100 characters." }),
 });
 
-export const SignUpFormSchema = z.object({
+export const SignUpSchema = z.object({
   username: z
     .string()
     .min(3, { message: "Username must be at least 3 characters long." })
@@ -50,14 +50,13 @@ export const SignUpFormSchema = z.object({
     }),
 });
 
-export const AskQuestionFormSchema = z.object({
+export const AskQuestionSchema = z.object({
   title: z
     .string()
-    .min(1, { message: "Title is required." })
-    .max(400, { message: "Title cannot exceed 400 characters." }),
+    .min(5, { message: "Title is required." })
+    .max(100, { message: "Title cannot exceed 100 characters." }),
 
-  content: z.string().min(1, { message: "content is required." }),
-
+  content: z.string().min(1, { message: "Body is required." }),
   tags: z
     .array(
       z
@@ -66,7 +65,7 @@ export const AskQuestionFormSchema = z.object({
         .max(30, { message: "Tag cannot exceed 30 characters." })
     )
     .min(1, { message: "At least one tag is required." })
-    .max(3, { message: "At most 3 tags are allowed." }),
+    .max(3, { message: "Cannot add more than 3 tags." }),
 });
 
 export const UserSchema = z.object({

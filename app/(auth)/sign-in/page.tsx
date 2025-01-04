@@ -3,13 +3,13 @@
 import React from "react";
 
 import AuthForm from "@/components/forms/AuthForm";
-import { SignInFormSchema } from "@/lib/validations";
+import { SignInSchema } from "@/lib/validations";
 
 const SignIn = () => {
   return (
     <AuthForm
       formType="SIGN_IN"
-      schema={SignInFormSchema}
+      schema={SignInSchema}
       defaultValues={{ email: "", password: "" }}
       onSubmit={(data) => Promise.resolve({ success: true, data })}
     />
