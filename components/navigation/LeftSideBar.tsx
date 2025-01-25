@@ -1,21 +1,17 @@
-"use client";
-
 import Image from "next/image";
 import Link from "next/link";
-import { Session } from "next-auth";
-import { signOut } from "next-auth/react";
 import React from "react";
 
+import { auth, signOut } from "@/auth";
 import ROUTES from "@/constants/routes";
 
 import NavLinks from "./navbar/NavLinks";
 import { Button } from "../ui/button";
 
-interface LeftSideBarProps {
-  session?: Session | null;
-}
+const LeftSideBar = async () => {
+  const session = await auth();
+  const userId = session?.user?.id;
 
-const LeftSideBar = ({ session }: LeftSideBarProps) => {
   return (
     <section
       className="custom-scrollbar background-light900_dark200 light-border 
@@ -24,11 +20,33 @@ const LeftSideBar = ({ session }: LeftSideBarProps) => {
       dark:shadow-none max-sm:hidden lg:w-[266px]"
     >
       <div className="flex flex-col justify-start gap-6">
-        <NavLinks isMobileNav={false} />
+        <NavLinks isMobileNav={false} userId={userId} />
       </div>
       <div className="flex flex-col gap-3">
-        {!session ?
-          <>
+        {userId ?
+          <form
+            action={async () => {
+              "use server";
+              await signOut();
+            }}
+          >
+            <Button
+              className="small-medium light-border-2 btn-tertiary
+          text-dark400_light900 min-h-[41px] w-full rounded-lg 
+          border px-4 py-3 shadow-none"
+              type="submit"
+            >
+              <Image
+                src="/icons/log-out.svg"
+                alt="lock"
+                width={20}
+                height={20}
+                className="invert-colors "
+              />
+              <span className="max-lg:hidden">SignOut</span>
+            </Button>
+          </form>
+        : <>
             <Button
               className="small-medium btn-secondary min-h-[41px] 
                 w-full rounded-lg px-4 py-3 shadow-none"
@@ -67,21 +85,6 @@ const LeftSideBar = ({ session }: LeftSideBarProps) => {
               </Link>
             </Button>
           </>
-        : <Button
-            className="small-medium light-border-2 btn-tertiary
-            text-dark400_light900 min-h-[41px] w-full rounded-lg 
-            border px-4 py-3 shadow-none"
-            onClick={() => signOut()}
-          >
-            <Image
-              src="/icons/log-out.svg"
-              alt="lock"
-              width={20}
-              height={20}
-              className="invert-colors "
-            />
-            <span className="max-lg:hidden">SignOut</span>
-          </Button>
         }
       </div>
     </section>
