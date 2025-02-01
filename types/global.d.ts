@@ -12,7 +12,7 @@ interface Author {
   image: string;
 }
 
-interface Question {
+interface QuestionType {
   _id: string;
   title: string;
   tags: Tag[];
@@ -38,3 +38,8 @@ type ErrorResponse = ActionResponse<undefined> & { success: false };
 
 type ApiErrorResponse = NextResponse<ErrorResponse>;
 type ApiResponse<T = null> = NextResponse<SuccessResponse<T> | ErrorResponse>;
+
+interface RouteParams {
+  params: Promise<Record<string, string>>;
+  searchParams: Promise<Record<string, string>>;
+}
