@@ -1,3 +1,4 @@
+import { LogOut } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -15,35 +16,30 @@ const LeftSideBar = async () => {
   return (
     <section
       className="custom-scrollbar background-light900_dark200 light-border 
-      sticky left-0 top-5 flex h-screen flex-col justify-between gap-10 
+      sticky left-0 top-0 flex h-screen flex-col justify-between 
       overflow-y-auto border-r p-6 pt-36 shadow-light-300 
       dark:shadow-none max-sm:hidden lg:w-[266px]"
     >
       <div className="flex flex-col justify-start gap-6">
         <NavLinks isMobileNav={false} userId={userId} />
       </div>
-      <div className="flex flex-col gap-3">
+      <div className="flex flex-col gap-3 pt-5">
         {userId ?
           <form
             action={async () => {
               "use server";
+
               await signOut();
             }}
           >
             <Button
-              className="small-medium light-border-2 btn-tertiary
-          text-dark400_light900 min-h-[41px] w-full rounded-lg 
-          border px-4 py-3 shadow-none"
               type="submit"
+              className="base-medium w-fit !bg-transparent px-4 py-3"
             >
-              <Image
-                src="/icons/log-out.svg"
-                alt="lock"
-                width={20}
-                height={20}
-                className="invert-colors "
-              />
-              <span className="max-lg:hidden">SignOut</span>
+              <LogOut className="size-5 text-black dark:text-white" />
+              <span className="text-dark300_light900 max-lg:hidden">
+                Logout
+              </span>
             </Button>
           </form>
         : <>

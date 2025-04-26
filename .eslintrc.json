@@ -53,7 +53,8 @@
         "*.tsx"
       ],
       "rules": {
-        "no-undef": "off"
+        "no-undef": "off",
+        "@typescript-eslint/no-unused-vars": "warn"
       }
     }
   ]
